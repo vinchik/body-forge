@@ -1,0 +1,78 @@
+<section
+  class="active"
+  [class.active--rest]="isResting()"
+  [class.active--prepare]="isPreparing()"
+  aria-live="polite"
+>
+  <header class="active__top">
+    <p class="active__phase">{{ phaseLabel() }}</p>
+    @if (!isPreparing()) {
+      <p class="active__progress">
+        Exercise {{ currentIndex() + 1 }} of {{ totalExercises() }}
+      </p>
+    }
+  </header>
+
+  <div class="timer">
+    <svg class="timer__ring" viewBox="0 0 300 300" aria-hidden="true">
+      <circle class="timer__track" cx="150" cy="150" r="140" />
+      <circle
+        class="timer__progress"
+        cx="150"
+        cy="150"
+        r="140"
+        [style.stroke-dasharray]="ringCircumference"
+        [style.stroke-dashoffset]="ringOffset()"
+      />
+    </svg>
+    <div class="timer__center">
+      <span class="timer__count" role="timer">{{ remaining() }}</span>
+      <span class="timer__unit">seconds</span>
+    </div>
+  </div>
+
+  <div class="active__exercise">
+    <h2 class="active__name">{{ headline() }}</h2>
+    @if (!isResting() && currentExercise()) {
+      <p class="active__desc">{{ currentExercise()!.description }}</p>
+      <p class="active__muscle">{{ currentExercise()!.targetMuscleGroup }}</p>
+    }
+    @if (nextExercise(); as next) {
+      <p class="active__next">
+        <span class="active__next-label">Up next</span>
+        <span class="active__next-name">{{ next.name }}</span>
+      </p>
+    } @else if (!isPreparing()) {
+      <p class="active__next">
+        <span class="active__next-label">Up next</span>
+        <span class="active__next-name">Finish line 🎉</span>
+      </p>
+    }
+  </div>
+
+  <div class="controls">
+    <button
+      class="control control--ghost"
+      type="button"
+      (click)="reset()"
+      aria-label="Reset workout"
+    >
+      Reset
+    </button>
+    <button
+      class="control control--primary"
+      type="button"
+      (click)="togglePause()"
+    >
+      {{ isPaused() ? 'Resume' : 'Pause' }}
+    </button>
+    <button
+      class="control control--ghost"
+      type="button"
+      (click)="skip()"
+      aria-label="Skip to next phase"
+    >
+      Skip
+    </button>
+  </div>
+</section>

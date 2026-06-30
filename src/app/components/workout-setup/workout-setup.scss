@@ -1,0 +1,191 @@
+:host {
+  display: block;
+}
+
+.setup {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2.5rem 1.5rem;
+}
+
+.setup__header {
+  text-align: center;
+}
+
+.setup__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+}
+
+.setup__title {
+  margin: 0;
+  font-size: clamp(2.5rem, 12vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  background: linear-gradient(120deg, var(--accent-work), var(--accent-blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.setup__subtitle {
+  margin: 0.75rem 0 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.setup__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.field__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.field__label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.field__value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-blue);
+}
+
+.field__value--work {
+  color: var(--accent-work);
+}
+
+.field__value--rest {
+  color: var(--accent-rest);
+}
+
+.field__scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--track);
+  outline: none;
+  cursor: pointer;
+  --thumb: var(--accent-blue);
+}
+
+.slider--work {
+  --thumb: var(--accent-work);
+}
+
+.slider--rest {
+  --thumb: var(--accent-rest);
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--thumb);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--thumb) 30%, transparent);
+  transition: transform 0.15s ease;
+}
+
+.slider::-webkit-slider-thumb:active {
+  transform: scale(1.15);
+}
+
+.slider::-moz-range-thumb {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--thumb);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--thumb) 30%, transparent);
+}
+
+.slider:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--thumb) 60%, transparent);
+}
+
+.start-button {
+  position: relative;
+  margin-top: 0.5rem;
+  padding: 1.15rem;
+  border: none;
+  border-radius: 1.25rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #04130c;
+  background: linear-gradient(120deg, var(--accent-work), #6ee7b7);
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 12px 30px -8px color-mix(in srgb, var(--accent-work) 70%, transparent);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.start-button:hover {
+  transform: translateY(-2px);
+}
+
+.start-button:active {
+  transform: translateY(0);
+}
+
+.start-button:focus-visible {
+  outline: 3px solid var(--text);
+  outline-offset: 3px;
+}
+
+.start-button__label {
+  position: relative;
+  z-index: 1;
+}
+
+.start-button__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.5), transparent 60%);
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .start-button,
+  .slider::-webkit-slider-thumb {
+    transition: none;
+  }
+}

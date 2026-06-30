@@ -14,10 +14,11 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render the setup screen by default', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, timed-muscles-builder');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Core Forge');
+    expect(compiled.querySelector('.start-button')).toBeTruthy();
   });
 });

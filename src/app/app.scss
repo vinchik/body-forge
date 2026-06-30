@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+}
+
+.app-shell {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  min-height: 100dvh;
+  padding: 0;
+}
+
+.app-shell__frame {
+  position: relative;
+  width: 100%;
+  max-width: 30rem;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* On larger screens, present the app as a centered "phone" canvas. */
+@media (min-width: 32rem) {
+  .app-shell {
+    align-items: center;
+    padding: 2rem 1rem;
+    background:
+      radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--accent-work) 12%, transparent), transparent 45%),
+      radial-gradient(circle at 80% 100%, color-mix(in srgb, var(--accent-blue) 14%, transparent), transparent 45%),
+      var(--bg-deep);
+  }
+
+  .app-shell__frame {
+    min-height: min(880px, calc(100dvh - 4rem));
+    border-radius: 2rem;
+    border: 1px solid var(--surface-border);
+    box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8);
+  }
+}

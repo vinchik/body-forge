@@ -1,6 +1,6 @@
 ---
-applyTo: "**/*.ts, **/*.html, **/*.scss"
-description: "Angular v22 coding standards and best practices"
+applyTo: '**/*.ts, **/*.html, **/*.scss'
+description: 'Angular v22 coding standards and best practices'
 ---
 
 # Angular v22 Instructions

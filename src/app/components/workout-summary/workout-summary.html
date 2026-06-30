@@ -1,0 +1,37 @@
+<section class="summary" aria-labelledby="summary-title">
+  <div class="summary__badge" aria-hidden="true">🔥</div>
+  <header class="summary__header">
+    <p class="summary__eyebrow">Workout complete</p>
+    <h1 id="summary-title" class="summary__title">Crushed it!</h1>
+  </header>
+
+  <dl class="stats">
+    <div class="stat">
+      <dt class="stat__label">Total time</dt>
+      <dd class="stat__value">{{ elapsedLabel() }}</dd>
+    </div>
+    <div class="stat">
+      <dt class="stat__label">Exercises</dt>
+      <dd class="stat__value">{{ totalExercises() }}</dd>
+    </div>
+  </dl>
+
+  <div class="summary__list">
+    <h2 class="summary__list-title">Your session</h2>
+    <ol class="exercise-list">
+      @for (exercise of exercises(); track exercise.id) {
+        <li class="exercise-list__item">
+          <span class="exercise-list__index">{{ $index + 1 }}</span>
+          <span class="exercise-list__body">
+            <span class="exercise-list__name">{{ exercise.name }}</span>
+            <span class="exercise-list__muscle">{{ exercise.targetMuscleGroup }}</span>
+          </span>
+        </li>
+      }
+    </ol>
+  </div>
+
+  <button class="restart-button" type="button" (click)="newWorkout()">
+    New Workout
+  </button>
+</section>
