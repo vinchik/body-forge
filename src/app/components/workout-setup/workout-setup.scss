@@ -155,7 +155,9 @@
   cursor: pointer;
   overflow: hidden;
   box-shadow: 0 12px 30px -8px color-mix(in srgb, var(--accent-work) 70%, transparent);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .start-button:hover {

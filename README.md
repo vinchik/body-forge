@@ -54,6 +54,42 @@ ng e2e
 
 Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
+## Deploying to GitHub Pages
+
+This repository is configured to deploy automatically to GitHub Pages via GitHub
+Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)).
+
+One-time setup:
+
+1. Push the repository to GitHub (the repo must be public, or you need a plan
+   that allows Pages on private repos).
+2. In the repository, go to **Settings → Pages → Build and deployment** and set
+   **Source** to **GitHub Actions**.
+
+After that, every push to `main` builds the app and publishes it. The site is
+served at:
+
+```
+https://<your-username>.github.io/<repository-name>/
+```
+
+The workflow sets the correct `--base-href` from the repository name
+automatically, copies `index.html` to `404.html` for SPA deep-link/refresh
+support, and adds a `.nojekyll` file.
+
+To reproduce the production build locally (assuming the repo is named
+`timed-muscles-builder`):
+
+```bash
+npm run build:pages
+```
+
+If your repository has a different name, build with a matching base href:
+
+```bash
+ng build --configuration production --base-href "/<repository-name>/"
+```
+
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

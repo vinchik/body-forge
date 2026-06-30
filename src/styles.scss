@@ -19,8 +19,9 @@
 
   --shadow-soft: 0 10px 24px -16px rgba(0, 0, 0, 0.9);
 
-  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont,
-    'Helvetica Neue', Arial, sans-serif;
+  --font-sans:
+    'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial,
+    sans-serif;
 }
 
 * {
@@ -45,4 +46,3 @@ body {
 button {
   font-family: inherit;
 }
-

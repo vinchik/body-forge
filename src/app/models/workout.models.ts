@@ -1,10 +1,5 @@
 /** Muscle groups targeted by the exercises in the local pool. */
-export type MuscleGroup =
-  | 'Upper Abs'
-  | 'Lower Abs'
-  | 'Obliques'
-  | 'Core'
-  | 'Full Core';
+export type MuscleGroup = 'Upper Abs' | 'Lower Abs' | 'Obliques' | 'Core' | 'Full Core';
 
 /** A single bodyweight exercise from the local database. */
 export interface Exercise {

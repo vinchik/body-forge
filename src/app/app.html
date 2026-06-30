@@ -1,5 +1,39 @@
 <main class="app-shell">
   <div class="app-shell__frame">
+    <button
+      class="sound-toggle"
+      type="button"
+      [class.sound-toggle--muted]="!soundEnabled()"
+      [attr.aria-pressed]="!soundEnabled()"
+      [attr.aria-label]="soundEnabled() ? 'Mute sound effects' : 'Unmute sound effects'"
+      [title]="soundEnabled() ? 'Mute sound effects' : 'Unmute sound effects'"
+      (click)="toggleSound()"
+    >
+      @if (soundEnabled()) {
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor" />
+          <path
+            d="M16 8.5a4 4 0 0 1 0 7M18.5 6a7.5 7.5 0 0 1 0 12"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      } @else {
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor" />
+          <path
+            d="M16 9l5 5M21 9l-5 5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      }
+    </button>
+
     @switch (screen()) {
       @case ('setup') {
         <app-workout-setup />

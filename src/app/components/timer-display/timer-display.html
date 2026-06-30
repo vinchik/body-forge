@@ -7,9 +7,7 @@
   <header class="active__top">
     <p class="active__phase">{{ phaseLabel() }}</p>
     @if (!isPreparing()) {
-      <p class="active__progress">
-        Exercise {{ currentIndex() + 1 }} of {{ totalExercises() }}
-      </p>
+      <p class="active__progress">Exercise {{ currentIndex() + 1 }} of {{ totalExercises() }}</p>
     }
   </header>
 
@@ -18,6 +16,7 @@
       <circle class="timer__track" cx="150" cy="150" r="140" />
       <circle
         class="timer__progress"
+        [class.timer__progress--snap]="snapRing()"
         cx="150"
         cy="150"
         r="140"
@@ -33,21 +32,23 @@
 
   <div class="active__exercise">
     <h2 class="active__name">{{ headline() }}</h2>
-    @if (!isResting() && currentExercise()) {
-      <p class="active__desc">{{ currentExercise()!.description }}</p>
-      <p class="active__muscle">{{ currentExercise()!.targetMuscleGroup }}</p>
-    }
-    @if (nextExercise(); as next) {
-      <p class="active__next">
-        <span class="active__next-label">Up next</span>
-        <span class="active__next-name">{{ next.name }}</span>
-      </p>
-    } @else if (!isPreparing()) {
-      <p class="active__next">
-        <span class="active__next-label">Up next</span>
-        <span class="active__next-name">Finish line 🎉</span>
-      </p>
-    }
+    <div class="active__details">
+      @if (!isResting() && currentExercise()) {
+        <p class="active__desc">{{ currentExercise()!.description }}</p>
+        <p class="active__muscle">{{ currentExercise()!.targetMuscleGroup }}</p>
+      }
+      @if (nextExercise(); as next) {
+        <p class="active__next">
+          <span class="active__next-label">Up next</span>
+          <span class="active__next-name">{{ next.name }}</span>
+        </p>
+      } @else if (!isPreparing()) {
+        <p class="active__next">
+          <span class="active__next-label">Up next</span>
+          <span class="active__next-name">Finish line 🎉</span>
+        </p>
+      }
+    </div>
   </div>
 
   <div class="controls">
@@ -59,11 +60,7 @@
     >
       Reset
     </button>
-    <button
-      class="control control--primary"
-      type="button"
-      (click)="togglePause()"
-    >
+    <button class="control control--primary" type="button" (click)="togglePause()">
       {{ isPaused() ? 'Resume' : 'Pause' }}
     </button>
     <button

@@ -1,4 +1,6 @@
-import { Service } from '@angular/core';
+import { Service, signal } from '@angular/core';
+
+const STORAGE_KEY = 'tmb.sound-enabled';
 
 /**
  * Lightweight audio + haptic feedback using the Web Audio API. The AudioContext
@@ -9,13 +11,35 @@ import { Service } from '@angular/core';
 export class AudioService {
   #context: AudioContext | null = null;
 
+  /** Whether sound (and haptic) feedback is currently enabled. */
+  readonly #enabled = signal(this.#readStoredPreference());
+  readonly enabled = this.#enabled.asReadonly();
+
+  #readStoredPreference(): boolean {
+    if (typeof localStorage === 'undefined') {
+      return true;
+    }
+    return localStorage.getItem(STORAGE_KEY) !== 'false';
+  }
+
+  /** Toggle sound on/off and persist the choice. */
+  toggle(): void {
+    const next = !this.#enabled();
+    this.#enabled.set(next);
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY, String(next));
+    }
+  }
+
   /** Lazily create / resume the shared AudioContext. */
   #ensureContext(): AudioContext | null {
     if (typeof window === 'undefined') {
       return null;
     }
     if (!this.#context) {
-      const Ctor = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      const Ctor =
+        window.AudioContext ??
+        (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
       if (!Ctor) {
         return null;
       }
@@ -34,6 +58,9 @@ export class AudioService {
 
   /** Play a single tone with a short attack/decay envelope. */
   #tone(frequency: number, durationMs: number, type: OscillatorType = 'sine', gain = 0.18): void {
+    if (!this.#enabled()) {
+      return;
+    }
     const ctx = this.#ensureContext();
     if (!ctx) {
       return;
@@ -84,6 +111,9 @@ export class AudioService {
   }
 
   #vibrate(pattern: number | number[]): void {
+    if (!this.#enabled()) {
+      return;
+    }
     if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
       navigator.vibrate(pattern);
     }

@@ -39,9 +39,28 @@ export class TimerDisplayComponent {
   protected readonly isResting = computed(() => this.phase() === 'rest');
   protected readonly isPreparing = computed(() => this.phase() === 'prepare');
 
+  /**
+   * Ring fill (0–1). It "leads" the countdown by one second so that, combined
+   * with the 1s CSS transition, the circle animates all the way to full exactly
+   * as the phase ends. At the first frame of a phase it reports 0 (empty).
+   */
+  protected readonly ringProgress = computed(() => {
+    const total = this.workout.phaseTotalSeconds();
+    const remaining = this.remaining();
+    if (total <= 0 || remaining >= total) {
+      return 0;
+    }
+    return Math.min(1, (total - remaining + 1) / total);
+  });
+
+  /** True on the first frame of a phase, so the ring snaps to empty instantly. */
+  protected readonly snapRing = computed(
+    () => this.remaining() >= this.workout.phaseTotalSeconds(),
+  );
+
   /** Stroke offset that shrinks as the phase progresses. */
   protected readonly ringOffset = computed(
-    () => this.ringCircumference * (1 - this.workout.phaseProgress()),
+    () => this.ringCircumference * (1 - this.ringProgress()),
   );
 
   protected readonly headline = computed<string>(() => {

@@ -111,4 +111,25 @@ export const EXERCISE_POOL: readonly Exercise[] = [
       'Balance on your glutes with legs and torso lifted into a V-shape, holding the position while keeping your spine long.',
     targetMuscleGroup: 'Core',
   },
+  {
+    id: 16,
+    name: 'V-Ups',
+    description:
+      'Lie flat, then simultaneously lift your straight legs and torso to meet over your hips in a V, reaching your hands toward your toes before lowering with control.',
+    targetMuscleGroup: 'Full Core',
+  },
+  {
+    id: 17,
+    name: 'Bird Dog',
+    description:
+      'On all fours, extend the opposite arm and leg until level with your back, hold briefly without rotating your hips, then switch sides.',
+    targetMuscleGroup: 'Core',
+  },
+  {
+    id: 18,
+    name: 'Dead Bug',
+    description:
+      'Lie on your back with arms and knees raised, then slowly lower the opposite arm and leg toward the floor while pressing your lower back down, and alternate.',
+    targetMuscleGroup: 'Core',
+  },
 ] as const;
