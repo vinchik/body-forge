@@ -10,6 +10,17 @@
 /node_modules
 npm-debug.log
 yarn-error.log
+pnpm-debug.log*
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# TypeScript
+*.tsbuildinfo
 
 # IDEs and editors
 .idea/
